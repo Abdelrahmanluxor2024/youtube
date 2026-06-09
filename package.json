@@ -4,6 +4,7 @@
   "description": "An ultra-lightweight, fast YouTube web client with auto-failover public instances.",
   "main": "server.js",
   "scripts": {
+    "build": "echo 'Static deployment'",
     "start": "node server.js",
     "dev": "node server.js"
   },
