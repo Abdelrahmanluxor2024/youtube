@@ -4,7 +4,7 @@
   "description": "An ultra-lightweight, fast YouTube web client with auto-failover public instances.",
   "main": "server.js",
   "scripts": {
-    "build": "mkdir -p dist && cp index.html styles.css app.js icons.js dist/",
+    "build": "node build.js",
     "start": "node server.js",
     "dev": "node server.js"
   },
