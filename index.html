@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LiteTube - يوتيوب خفيف وسريع بدون إعلانات</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="تصفح وشاهد فيديوهات يوتيوب بسرعة فائقة وبدون إعلانات. مشغل يوتيوب خفيف وموفر للبيانات مع خصوصية كاملة ودعم تبديل الخوادم التلقائي.">
+  <meta name="keywords" content="يوتيوب خفيف, يوتيوب بدون إعلانات, تصفح يوتيوب سريع, watch youtube fast, invidious client, litetube">
+  <meta name="author" content="LiteTube Team">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+
+  <!-- Core Styling -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- HEADER -->
+    <header>
+      <div class="logo-section" onclick="Navigation.goToHome()" id="btn-logo">
+        <span class="logo-text">⚡ LiteTube</span>
+        <span class="logo-badge">سريع جداً</span>
+      </div>
+      
+      <!-- Search Engine -->
+      <div class="search-container">
+        <form class="search-form" id="search-form">
+          <div class="search-wrapper">
+            <span class="search-icon-inside" data-icon="search"></span>
+            <input 
+              type="text" 
+              class="search-input" 
+              id="search-input" 
+              placeholder="ابحث عن فيديوهات، قنوات، أو قوائم تشغيل..." 
+              autocomplete="off"
+              required
+            >
+          </div>
+          <button type="submit" class="search-button" id="btn-search-submit">بحث</button>
+        </form>
+      </div>
+      
+      <!-- Controls -->
+      <div class="header-controls">
+        <button class="btn-icon" id="theme-toggle" title="تغيير المظهر" aria-label="Toggle Theme"></button>
+        <button class="btn-icon" onclick="window.location.hash='settings'" title="الإعدادات" aria-label="Open Settings">
+          <span data-icon="settings"></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- SIDEBAR NAVIGATION -->
+    <aside>
+      <div class="nav-group">
+        <h3 class="nav-title">تصفح</h3>
+        <ul class="nav-list">
+          <li>
+            <a href="#home" class="nav-item active" data-target-view="home" id="nav-home">
+              <span data-icon="home"></span>
+              <span>الرئيسية</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="nav-group">
+        <h3 class="nav-title">المكتبة الخاصة بك</h3>
+        <ul class="nav-list">
+          <li>
+            <a href="#bookmarks" class="nav-item" data-target-view="bookmarks" id="nav-bookmarks">
+              <span data-icon="bookmark"></span>
+              <span>المفضلة</span>
+            </a>
+          </li>
+          <li>
+            <a href="#history" class="nav-item" data-target-view="history" id="nav-history">
+              <span data-icon="clock"></span>
+              <span>سجل المشاهدة</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <h3 class="nav-title">الإعدادات</h3>
+        <ul class="nav-list">
+          <li>
+            <a href="#settings" class="nav-item" data-target-view="settings" id="nav-settings">
+              <span data-icon="settings"></span>
+              <span>خيارات التشغيل</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Server Status Indicators -->
+      <div class="sidebar-footer">
+        <div class="instance-status-card">
+          <div class="status-row">
+            <span class="status-label">حالة الاتصال:</span>
+            <span class="status-indicator" id="status-indicator">
+              <span class="dot yellow" id="status-dot"></span>
+              <span style="font-weight:600;">فحص...</span>
+            </span>
+          </div>
+          <div class="instance-name" id="active-instance-name">خادم البيانات</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN VIEWPORT -->
+    <main>
+      
+      <!-- 1. Home View -->
+      <section class="view-section active" id="view-home">
+        <div class="view-header">
+          <h2 class="view-title">
+            <span data-icon="fire" style="color:var(--accent-secondary);"></span>
+            <span>الأكثر رواجاً اليوم (Trending)</span>
+          </h2>
+        </div>
+        <div class="video-grid" id="home-video-grid">
+          <!-- Populated by app.js -->
+        </div>
+      </section>
+
+      <!-- 2. Search Results View -->
+      <section class="view-section" id="view-search">
+        <div class="view-header">
+          <h2 class="view-title" id="search-view-title">نتائج البحث</h2>
+        </div>
+        <div class="video-grid" id="search-video-grid">
+          <!-- Populated by app.js -->
+        </div>
+      </section>
+
+      <!-- 3. Watch Video View -->
+      <section class="view-section" id="view-watch">
+        <!-- Rendered dynamically by app.js (player-layout) -->
+      </section>
+
+      <!-- 4. Bookmarks (Favorites) View -->
+      <section class="view-section" id="view-bookmarks">
+        <div class="view-header">
+          <h2 class="view-title">
+            <span data-icon="heart" style="color:var(--accent-secondary)"></span>
+            <span>الفيديوهات المفضلة</span>
+          </h2>
+        </div>
+        <div class="video-grid" id="bookmarks-video-grid">
+          <!-- Populated by app.js -->
+        </div>
+      </section>
+
+      <!-- 5. History View -->
+      <section class="view-section" id="view-history">
+        <div class="view-header">
+          <h2 class="view-title">
+            <span data-icon="clock" style="color:var(--accent)"></span>
+            <span>سجل المشاهدة</span>
+          </h2>
+        </div>
+        <div class="video-grid" id="history-video-grid">
+          <!-- Populated by app.js -->
+        </div>
+      </section>
+
+      <!-- 6. Settings View -->
+      <section class="view-section" id="view-settings">
+        <div class="view-header">
+          <h2 class="view-title">
+            <span data-icon="settings"></span>
+            <span>الإعدادات والخيارات</span>
+          </h2>
+        </div>
+        <div class="settings-view" id="settings-card-container">
+          <!-- Settings fields rendered dynamically by app.js -->
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- Notification Container for Toast Alerts -->
+  <div class="notification-container" id="notification-container"></div>
+
+  <!-- Javascript Core Components -->
+  <script src="icons.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

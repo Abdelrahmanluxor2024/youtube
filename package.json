@@ -1,0 +1,19 @@
+{
+  "name": "litetube",
+  "version": "1.0.0",
+  "description": "An ultra-lightweight, fast YouTube web client with auto-failover public instances.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "youtube",
+    "lightweight",
+    "invidious",
+    "fast",
+    "no-ads"
+  ],
+  "author": "",
+  "license": "MIT"
+}
