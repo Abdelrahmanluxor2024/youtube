@@ -1,1 +1,5 @@
 server.js
+build.js
+package.json
+package-lock.json
+dist
